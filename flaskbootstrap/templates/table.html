@@ -1,0 +1,59 @@
+{% extends "super/tablebase.html" %}
+{% block content %}
+    {{ super() }}
+{% endblock %}
+
+{% block rightArea %}
+    <label for="regionSelected">品牌選取</label>
+    <select id="regionSelected" aria-label="Default select example" class="form-select">
+        <option selected>所有品牌</option>
+        {% for name in regions %}
+         <option>{{name}}</option>
+        {% endfor %}
+    </select>
+    <button id="btn">GO</button>
+
+        <h1>{{region}}</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">編號</th>
+              <th scope="col">品名</th>
+              <th scope="col">品牌</th>
+              <th scope="col">價格</th>
+            </tr>
+            </thead>
+  <tbody>
+    {% for item in data %}
+      <tr>
+        <th scope="row">{{item['編號']}}</th>
+        <td>{{item['品名']}}</td>
+        <td>{{item['品牌']}}</td>
+        <td>{{item['價格']}}</td>
+
+      </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
+
+{% block script%}
+<script>
+    const btn = document.querySelector('#btn');
+    const rs = document.querySelector('#regionSelected')
+    btn.onclick = (event) => {
+        event.preventDefault()
+        console.log(rs.options[rs.selectedIndex].text)
+        selectedIndex = rs.selectedIndex
+        area = rs.options[selectedIndex].text
+        if(selectedIndex == 0){
+           window.location = "/table"
+        }else{
+           window.location = '/table/' + area;
+        }
+
+    }
+</script>
+{% endblock %}
