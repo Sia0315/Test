@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Required meta tags -->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    {% block head %}
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <title>{% block title%}輝く１番星{% endblock %}</title>
+
+    {% endblock %}
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light navbar-expand-lg  bg-light">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="/">
+                <img alt="" class="d-inline-block align-text-top" height="38"
+                     src="{{url_for('static', filename='images/Eevee.png')}}"
+                     width="38">
+                <span>イーブイズ</span>
+            </a>
+            <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                    data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        {% if name == 'layout' %}
+                            <a aria-current="page" class="nav-link active" href="/layout">メンバー</a>
+                        {% else %}
+                            <a aria-current="page" class="nav-link" href="/layout">メンバー</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if name == 'table' %}
+                            <a aria-current="page" class="nav-link active" href="/table">ひょう</a>
+                        {% else %}
+                            <a class="nav-link" href="/table">ひょう</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sqlalchemy">ロトー</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/price">価格</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{% block content %}
+    コンテンツ
+{% endblock %}
+
+{% block footer %}
+    ページ腳
+{% endblock %}
+
+<script src="{{url_for('static', filename='js/bootstrap.bundle.js')}}"></script>
+{% block script%}
+{% endblock %}
+</body>
+</html>

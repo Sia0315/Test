@@ -1,0 +1,102 @@
+{% extends 'super/sqlbase.html' %}
+
+{% block content %}
+{{ super() }}
+<form method="post" action="/sqlalchemy/loto">
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >num1</span>
+        <input type="text" id="num1" name="num1" class="form-control" placeholder="番号1" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >num2</span>
+        <input type="text" id="num2" name="num2" class="form-control" placeholder="番号2" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >num3</span>
+        <input type="text" id="num3" name="num3" class="form-control" placeholder="番号3" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >num4</span>
+        <input type="text" id="num4" name="num4" class="form-control" placeholder="番号4" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >num5</span>
+        <input type="text" id="num5" name="num5" class="form-control" placeholder="番号5" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >num6</span>
+        <input type="text" id="num6" name="num6" class="form-control" placeholder="番号6" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="input-group flex-nowrap">
+        <span class="input-group-text" >スペシャル</span>
+        <input type="text" id="num7" name="num7" class="form-control" placeholder="スペシャル" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <input type="submit" value="送信">
+</form>
+<button type="button" class="btn btn-primary" id="createdRandom">建立亂數</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">日期</th>
+        <th scope="col">番号1</th>
+        <th scope="col">番号2</th>
+        <th scope="col">番号3</th>
+        <th scope="col">番号4</th>
+        <th scope="col">番号5</th>
+        <th scope="col">番号6</th>
+        <th scope="col">スペシャル</th>
+      </tr>
+    </thead>
+    <tbody>
+       {% for item in data%} 
+      <tr>
+        <th scope="row">{{item.日期.strftime("%Y-%m-%d %H:%M:%S")}}</th>
+        <td>{{item.num1}}</td>
+        <td>{{item.num2}}</td>
+        <td>{{item.num3}}</td>
+        <td>{{item.num4}}</td>
+        <td>{{item.num5}}</td>
+        <td>{{item.num6}}</td>
+        <td>{{item.特別號}}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block footer%}
+{% endblock %}
+
+{% block script%}
+<script>
+    var randomBtn = document.getElementById('createdRandom');
+    randomBtn.onclick = (event) => {
+       const max = 49
+        const min = 1
+        //var num =(Math.floor(Math.random() * 100000)) % (max-min+1) + 1;
+        //console.log(num);
+        var nums = [];
+        while(nums.length<7){
+            var num =(Math.floor(Math.random() * 100000)) % (max-min+1) + 1;
+            if(!nums.includes(num)){
+                nums.push(num)
+            }
+        }
+
+        for(var i=0; i<nums.length; i++){
+            var num = nums[i]
+            var inputElement = document.getElementById('num' + (i+1));//inputElement.setAttribute('value', num)
+            inputElement.setAttribute('value', num)
+        }
+
+    }
+
+</script>
+{% endblock %}
