@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hosikawa-sara'
 app.register_blueprint(tableApp)
 app.register_blueprint(youbikeApp)
-app.register_blueprint(sqlApp)
+#app.register_blueprint(sqlApp)
 
 @app.errorhandler(404)
 def error404(err):
